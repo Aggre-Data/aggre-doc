@@ -63,6 +63,14 @@ sh examples/invoke-all-examples.sh
 | `search_judgments` / `get_judgment` / `lookup_judgment` | [`03`](examples/requests/03-search-judgments-unjust-enrichment.json) / [`04`](examples/requests/04-get-judgment.json) / [`05`](examples/requests/05-lookup-judgment.json) |
 | `get_record` / `list_datasets` / `search_dataset` / `get_dataset_schema` | [`06`](examples/requests/06-get-record-labor-act-16.json) / [`07`](examples/requests/07-list-legal-datasets.json) / [`08`](examples/requests/08-search-dataset-laws.json) / [`09`](examples/requests/09-get-dataset-schema.json) |
 
+### 查判決的完整流程
+
+1. 先送 [`03-search-judgments-unjust-enrichment.json`](examples/requests/03-search-judgments-unjust-enrichment.json)，從每筆 hit 取得 `doc_id` 與 `excerpt_start`。
+2. 把它們帶入 [`04-get-judgment.json`](examples/requests/04-get-judgment.json) 的 `doc_id` 與 `around`，讀取理由段落的上下文。
+3. 已有字號時，先用 [`05-lookup-judgment.json`](examples/requests/05-lookup-judgment.json) 驗證存在與法院，再讀取全文。
+
+三個請求也已放進 [`examples/requests.http`](examples/requests.http)，可直接由 HTTP Client 執行。
+
 ---
 
 ## 1. `retrieve` — 語意檢索

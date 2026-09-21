@@ -19,7 +19,69 @@ User-Agent: aggre-doc-example/1.0
   }
 }
 
-### Discover legal datasets
+### Batch semantic search — up to three independent questions per request
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "retrieve_batch",
+  "arguments": {
+    "queries": [
+      { "id": "termination", "query": "雇主終止勞動契約的預告期間" },
+      { "id": "notice-pay", "query": "雇主沒有預告終止勞動契約應給付什麼" }
+    ],
+    "dataset": "taiwan-moj-laws-ch-law",
+    "top_k": 2,
+    "depth": "fast"
+  }
+}
+
+### Search judgment reasoning passages — start here for case-law research
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "search_judgments",
+  "arguments": {
+    "query": "相當於租金之不當得利 請求權時效",
+    "max_results": 3,
+    "depth": "fast"
+  }
+}
+
+### Read judgment context — use doc_id and excerpt_start returned by search_judgments
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "get_judgment",
+  "arguments": {
+    "doc_id": "CHDV,98,重訴,24,20090714,1",
+    "around": 1760,
+    "max_chars": 1000
+  }
+}
+
+### Verify a judgment citation before relying on it
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "lookup_judgment",
+  "arguments": {
+    "citation": "最高法院49年台上字第1730號"
+  }
+}
+
+### Discover a specific legal dataset
 POST {{apiBase}}/v1/mcp/call
 Authorization: Bearer {{AGGRE_API_KEY}}
 Content-Type: application/json
@@ -28,6 +90,48 @@ User-Agent: aggre-doc-example/1.0
 {
   "name": "list_datasets",
   "arguments": {
-    "category": "legal"
+    "category": "legal",
+    "query": "taiwan-judgments"
+  }
+}
+
+### Literal search within one dataset
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "search_dataset",
+  "arguments": {
+    "dataset_id": "taiwan-moj-laws-ch-law",
+    "query": "勞動基準法",
+    "limit": 3
+  }
+}
+
+### Inspect a dataset's schema
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "get_dataset_schema",
+  "arguments": {
+    "dataset_id": "taiwan-judgments"
+  }
+}
+
+### Fetch a complete record returned by retrieve
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "get_record",
+  "arguments": {
+    "id": "333500b2-d24b-54ef-ace4-7156a666d35b"
   }
 }
