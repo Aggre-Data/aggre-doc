@@ -1,0 +1,4 @@
+# Local credential files and ad-hoc captures must never be committed.
+.env
+.env.*
+*.private.json

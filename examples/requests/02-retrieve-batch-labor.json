@@ -1,0 +1,12 @@
+{
+  "name": "retrieve_batch",
+  "arguments": {
+    "queries": [
+      { "id": "termination", "query": "雇主終止勞動契約的預告期間" },
+      { "id": "notice-pay", "query": "雇主沒有預告終止勞動契約應給付什麼" }
+    ],
+    "dataset": "taiwan-moj-laws-ch-law",
+    "top_k": 2,
+    "depth": "fast"
+  }
+}

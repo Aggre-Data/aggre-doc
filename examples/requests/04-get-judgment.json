@@ -1,0 +1,8 @@
+{
+  "name": "get_judgment",
+  "arguments": {
+    "doc_id": "CHDV,98,重訴,24,20090714,1",
+    "around": 1760,
+    "max_chars": 1000
+  }
+}

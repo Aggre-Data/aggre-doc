@@ -1,0 +1,9 @@
+{
+  "name": "retrieve",
+  "arguments": {
+    "query": "雇主終止勞動契約預告期間",
+    "corpus": "laws",
+    "top_k": 2,
+    "depth": "fast"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "search_dataset",
+  "arguments": {
+    "dataset_id": "taiwan-moj-laws-ch-law",
+    "query": "勞動基準法",
+    "limit": 3
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "as_of": null,
+  "complete": true,
+  "corpus": "laws",
+  "query": "雇主終止勞動契約預告期間",
+  "searched": [
+    "taiwan-moj-laws-ch-law",
+    "taiwan-moj-orders-ch-order"
+  ],
+  "strategy": "two-stage",
+  "timed_out": [],
+  "total": 2,
+  "note": "LEXICAL PLATEAU on taiwan-moj-orders-ch-order: every first-stage candidate scored identically, so the ranking is uninformative and the best match may not be in the pool at all. Re-query using the statute's own wording, or cite the article directly",
+  "results": [
+    {
+      "record_id": "333500b2-d24b-54ef-ace4-7156a666d35b",
+      "external_id": "ch-law:N0030001:art:16",
+      "dataset": "taiwan-moj-laws-ch-law",
+      "title": "勞動基準法",
+      "law_name": "勞動基準法",
+      "article_no": "第 16 條",
+      "status": "in-force",
+      "rerank_score": 0.9982522,
+      "snippet": "雇主依第十一條或第十三條但書規定終止勞動契約者，其預告期間依左列各款之規定：\n一、繼續工作三個月以上一年未滿者，於十日前預告之。\n二、繼續工作一年以上三年未滿者，於二十日前預告之。\n三、繼續工作三年以上者，於三十日前預告之。\n勞工於接到前項預告後，為另謀工作得於工作時間請假外出。其請假時數，每星期不得超過二日之工作時間，請假期間之工資照給。\n雇主未依第一項規定期間預告而終止契約者，應給付預告期間之工資。"
+    },
+    {
+      "record_id": "c6cd8091-837e-5838-881f-af95db73ccd7",
+      "external_id": "ch-law:J0080041:art:17",
+      "dataset": "taiwan-moj-laws-ch-law",
+      "title": "企業併購法",
+      "law_name": "企業併購法",
+      "article_no": "第 17 條",
+      "status": "in-force",
+      "rerank_score": 0.9653158,
+      "snippet": "公司進行併購，未經留用或不同意留用之勞工，應由併購前之雇主終止勞動契約，並依勞動基準法第十六條規定期間預告終止或支付預告期間工資，並依法發給勞工退休金或資遣費。\n前項所定不同意留用，包括經同意留用後，於併購基準日前因個人因素不願留用之情形。"
+    }
+  ]
+}

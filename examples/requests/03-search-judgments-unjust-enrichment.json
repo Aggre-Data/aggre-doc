@@ -1,0 +1,8 @@
+{
+  "name": "search_judgments",
+  "arguments": {
+    "query": "相當於租金之不當得利 請求權時效",
+    "max_results": 3,
+    "depth": "fast"
+  }
+}

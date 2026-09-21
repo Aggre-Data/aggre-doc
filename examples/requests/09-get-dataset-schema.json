@@ -1,0 +1,6 @@
+{
+  "name": "get_dataset_schema",
+  "arguments": {
+    "dataset_id": "taiwan-judgments"
+  }
+}

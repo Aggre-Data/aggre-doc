@@ -39,6 +39,32 @@ curl -X POST https://aggre.orbbit.ai/v1/mcp/call \
 
 ---
 
+## 可執行範例與實測回應
+
+完整範例索引在 [`examples/README.md`](examples/README.md)：每個工具各有一份原始 JSON
+請求檔、用途說明，以及一次跑完所有讀取案例的 runner。快速以 HTTP Client 互動時，仍可使用
+[`examples/requests.http`](examples/requests.http)。請在工具的**私有環境**設定 `AGGRE_API_KEY`，
+不要把金鑰填進檔案。
+
+在 Git Bash、WSL、macOS 或 Linux，以 `sh` 從目前程序的環境變數讀取金鑰：
+
+```sh
+export AGGRE_API_KEY='<your-key>'
+sh examples/fetch-aggre.sh --request examples/requests/01-retrieve-labor-notice.json
+sh examples/invoke-all-examples.sh
+```
+
+`examples/responses/retrieve-labor-notice.json` 是 2026-09-21 的實測回應摘錄，對應
+「雇主終止勞動契約預告期間」的法規檢索；為易讀省略了空陣列欄位，且不含任何認證資訊。實際執行時請以最新回應為準。
+
+| 工具 | 對應範例 |
+|---|---|
+| `retrieve` / `retrieve_batch` | [`01`](examples/requests/01-retrieve-labor-notice.json) / [`02`](examples/requests/02-retrieve-batch-labor.json) |
+| `search_judgments` / `get_judgment` / `lookup_judgment` | [`03`](examples/requests/03-search-judgments-unjust-enrichment.json) / [`04`](examples/requests/04-get-judgment.json) / [`05`](examples/requests/05-lookup-judgment.json) |
+| `get_record` / `list_datasets` / `search_dataset` / `get_dataset_schema` | [`06`](examples/requests/06-get-record-labor-act-16.json) / [`07`](examples/requests/07-list-legal-datasets.json) / [`08`](examples/requests/08-search-dataset-laws.json) / [`09`](examples/requests/09-get-dataset-schema.json) |
+
+---
+
 ## 1. `retrieve` — 語意檢索
 
 ### 1a. 一般語意查詢
@@ -714,48 +740,7 @@ JID 不在索引回 404。
 
 ---
 
-## 10. `export_sample` / `export_dataset` — 匯出
-
-`export_sample`：小樣本，最新的在前，`limit` 1–100（預設 10）。
-
-```json
-{ "name": "export_sample", "arguments": { "dataset_id": "taiwan-standard-contracts", "limit": 2 } }
-```
-
-```json
-{
-  "format": "json",
-  "records": [
-    { "id": "…", "external_id": "…", "data": { "title": "汽車買賣定型化契約範本" } },
-    { "id": "…", "external_id": "…", "data": { "title": "健身房定型化契約應記載及不得記載事項" } }
-  ],
-  "total": 2
-}
-```
-
-`export_dataset`：翻完整個資料集，最舊的在前、順序穩定，`limit` 1–2000（預設 500）。
-
-```json
-{ "name": "export_dataset", "arguments": { "dataset_id": "china-national-laws", "limit": 500, "offset": 0 } }
-```
-
-```json
-{
-  "format": "json",
-  "records": [ { "id": "…", "external_id": "…", "data": { "name": "…" } } ],
-  "returned": 500,
-  "offset": 0,
-  "total": 2443,
-  "next_offset": 500
-}
-```
-
-把 `next_offset` 當成下一次的 `offset` 繼續翻，直到 `next_offset` 為 `null`。
-兩者都需要 `export_write` 權限。
-
----
-
-## 11. 典型流程
+## 10. 典型流程
 
 **問法條** → `retrieve`（`corpus:"laws"`）→ 取 `record_id` → `get_record` 讀全文 →
 以 `law_name` + `article_no` + `external_id` 引用。
@@ -774,7 +759,7 @@ JID 不在索引回 404。
 
 ---
 
-## 12. 逾時建議
+## 11. 逾時建議
 
 第一階段每個語料各有自己的預算，客戶端 timeout 請留足：
 
@@ -789,7 +774,7 @@ JID 不在索引回 404。
 
 ---
 
-## 13. 回應中一定要看的旗標
+## 12. 回應中一定要看的旗標
 
 | 欄位 | 意思 |
 |---|---|

@@ -1,0 +1,33 @@
+@apiBase = https://aggre.orbbit.ai
+
+# In your HTTP client's private environment, define AGGRE_API_KEY.
+# Do not put its value in this file or commit it.
+
+### Semantic search: labor-contract termination notice period
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "retrieve",
+  "arguments": {
+    "query": "雇主終止勞動契約預告期間",
+    "corpus": "laws",
+    "top_k": 2,
+    "depth": "fast"
+  }
+}
+
+### Discover legal datasets
+POST {{apiBase}}/v1/mcp/call
+Authorization: Bearer {{AGGRE_API_KEY}}
+Content-Type: application/json
+User-Agent: aggre-doc-example/1.0
+
+{
+  "name": "list_datasets",
+  "arguments": {
+    "category": "legal"
+  }
+}
